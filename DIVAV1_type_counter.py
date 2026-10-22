@@ -2,7 +2,7 @@
 from get_specific_type_of_file import get_file
 from config_path import ANNOTATION_PATH
 
-
+path = ANNOTATION_PATH
 types = ["*.activities.yml", "*.geom.yml", "*.types.yml", "*.regions.yml"]
 counts = {}
 
