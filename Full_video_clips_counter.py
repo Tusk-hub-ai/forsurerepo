@@ -1,7 +1,13 @@
-from pathlib import Path
 
+from get_specific_type_of_file import get_file
+from config_path import ANNOTATION_PATH
+
+
+
+path = ANNOTATION_PATH
+
+get_file(path= path, specificType="*.types.yml")
 number = 0
-path = Path(r"C:\exercices\dataretriever\viratannotations").rglob( pattern= "*types.yml")
 #If the scripts fails it is probably the path.
 for file in path:
     name = file.name
