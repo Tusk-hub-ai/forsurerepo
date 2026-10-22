@@ -2,14 +2,14 @@
 import yaml
 from config_path import ANNOTATION_PATH
 from get_specific_type_of_file import get_file
+import numpy as np
+
 path = get_file(path=ANNOTATION_PATH, specificType="*.activities.yml")
-
-
 
 activity_types =  {}
 activity_time = {}
 total_activities = 0
-
+time_list = []
 
 
 for file in path:
@@ -28,6 +28,8 @@ for file in path:
                 # .keys() returns a view that cannot be indexed, so we convert it to a list
                 # (["Talking"]) and take its first and only element with [0] -> "Talking".
                 start, end = row["act"]["timespan"][0]["tsr0"]
+
+                time_list.append(end-start+1)
                 activity_time[action] = activity_time.get(action, 0) + (end - start + 1)
                 #Retrieves information about the how long the specific activity is.
                 # timespan is a list of time spans, e.g. [{"tsr0": [3480, 3600]}].
@@ -50,3 +52,8 @@ print("in hours")
 print((sum(activity_time.values())//30)//3600)
 print("\nframes for each activity categorie:")
 print(sorted(activity_time.items(), key=lambda pair: pair[1], reverse=True))
+print("\n\nIn frames")
+print(f"minimum activity : {np.min(time_list)}")
+print(f"maximum activity : {np.max(time_list)}")
+print(f"median activity : {np.median(time_list)}")
+print(f"mean activity : {np.mean(time_list)}")
