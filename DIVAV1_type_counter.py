@@ -1,14 +1,14 @@
-from pathlib import Path
 
-path = Path(r"C:\exercices\dataretriever\viratannotations")
-# This must be YOUR local path to the DIVA V1 annotations.
+from get_specific_type_of_file import get_file
+from config_path import ANNOTATION_PATH
+
 
 types = ["*.activities.yml", "*.geom.yml", "*.types.yml", "*.regions.yml"]
 counts = {}
 
 for pattern in types:
     count = 0
-    for file in path.rglob(pattern):
+    for file in get_file(path=path,specificType=pattern):
         #rglob stands for recursive glob, it checks every folder/files in the path for a patern.
         count += 1
     counts[pattern] = count
